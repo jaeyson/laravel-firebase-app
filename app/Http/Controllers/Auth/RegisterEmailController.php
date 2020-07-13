@@ -9,6 +9,7 @@ use Kreait\Firebase\Auth;
 
 class RegisterEmailController extends Controller
 {
+
     public function __construct(Auth $auth)
     {
         $this->auth = $auth;
@@ -17,25 +18,18 @@ class RegisterEmailController extends Controller
 
     public function index()
     {
+        // $user = $this->auth->getUser('Oc0GDbe3BbVhdyQXBGKFJFNj0742');
+        // dd($user); //returns UserRecord
         return view('auth.register');
     }
 
     public function register(Request $request)
     {
         $password = $request->get('password');
+        $email = $request->get('email');
 
-        $userProperties = [
-            'email' => $request->get('email'),
-            'password' => Hash::make($password),
-            'emailVerified' => false,
-            'phoneNumber' => null,
-            'photoUrl' => null,
-            'displayName' => null,
-            'disabled' => false,
-        ];
+        $this->auth->createUserWithEmailAndPassword($email, $password);
 
-        $user = $this->auth->createUser($userProperties);
-        dd($user);
         //firstname
         //lastname
         //displayname = firstname.lastname lowercase
