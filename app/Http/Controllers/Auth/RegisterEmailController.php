@@ -29,7 +29,7 @@ class RegisterEmailController extends Controller
         $email = $request->get('email');
 
         $this->auth->createUserWithEmailAndPassword($email, $password);
-
+        // return redirect('/contacts')->with('success', 'updated...');
         //firstname
         //lastname
         //displayname = firstname.lastname lowercase
